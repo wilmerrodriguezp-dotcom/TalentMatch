@@ -1,0 +1,91 @@
+flowchart TD
+    A["ETAPA 1: Descubrimiento<br/>y Requerimientos"]
+
+    B{"¿QUÉ SE HACE?<br/>Levantamiento de<br/>Información"}
+
+    C["¿Qué queremos construir?<br/>( TalentMatch
+        Plataforma web para formar equipos académicos
+        Sistema de recomendación de compañeros
+        Conexión entre estudiantes y proyectos
+      Objetivos del negocio
+        Facilitar la formación de equipos
+        Aprovechar mejor las habilidades
+        Reducir el tiempo para encontrar compañeros
+        Mejorar la colaboración académica)"]
+    D["¿Para quién?<br/>( Estudiantes
+        Crean su perfil
+        Registran habilidades
+        Indican intereses
+        Buscan proyectos
+        Encuentran compañeros compatibles
+      Profesores
+        Publican proyectos
+        Supervisan equipos
+        Consultan avances
+      Administradores
+        Gestionan usuarios
+        Gestionan proyectos
+        Supervisan la plataforma)"]
+    E["¿Qué debe hacer?<br/>( Requerimientos funcionales
+        Registro e inicio de sesión
+        Crear y editar perfil
+        Registrar habilidades
+        Registrar intereses
+        Publicar proyectos
+        Buscar proyectos
+        Buscar estudiantes
+        Recomendar compañeros
+        Crear equipos
+        Gestionar proyectos
+        Chat entre integrantes
+        Notificaciones
+        Panel administrativo
+      Requerimientos no funcionales
+        Seguridad de datos
+        Interfaz responsive
+        Facilidad de uso
+        Buen tiempo de respuesta
+        Disponibilidad
+        Escalabilidad
+        Compatibilidad con navegadores
+        Protección de contraseñas)"]
+
+    F["RESULTADO ESPERADO:<br/>  Documento de visión
+        Problema
+        Solución
+        Objetivos
+        Beneficios
+      Alcance
+        Gestión de usuarios
+        Perfiles y habilidades
+        Matching de estudiantes
+        Gestión de proyectos
+        Comunicación
+      Arquitectura
+        Frontend
+        Backend
+        Base de datos
+        API REST
+        Sistema de recomendación
+      Contratos iniciales
+        Reglas de negocio
+        Requisitos
+        Roles y permisos
+        Casos de uso"]
+
+    A --> B
+
+    B --> C
+    B --> D
+    B --> E
+
+    C --> F
+    D --> F
+    E --> F
+
+    style A fill:#183b8c,color:#fff,stroke:#4da3ff
+    style B fill:#f28c00,color:#fff,stroke:#ffb347
+    style C fill:#e8f7ff,color:#111,stroke:#4da3ff
+    style D fill:#e8f7ff,color:#111,stroke:#4da3ff
+    style E fill:#e8f7ff,color:#111,stroke:#4da3ff
+    style F fill:#d9f7e5,color:#111,stroke:#3cb371
