@@ -1,0 +1,40 @@
+C4Component
+
+title TalentMatch - Nivel 3: Componentes del Backend API REST
+
+Container(web, "Aplicación Web", "React / TypeScript", "Interfaz para estudiantes, profesores y administradores.")
+
+Container_Boundary(api, "Backend API REST") {
+
+    Component(authMiddleware, "Autenticación y Autorización", "ASP.NET Core / JWT", "Valida tokens y permisos de acceso.")
+
+    Component(controller, "API Controllers", "ASP.NET Core", "Recibe solicitudes HTTP y expone los endpoints.")
+
+    Component(service, "Servicios de Aplicación", ".NET 8 / C#", "Coordina los casos de uso del sistema.")
+
+    Component(domain, "Lógica de Negocio", ".NET 8 / C#", "Gestiona las reglas de usuarios, proyectos, equipos y matching.")
+
+    Component(repository, "Repositorios", "Entity Framework Core", "Gestiona el acceso y persistencia de los datos.")
+}
+
+ContainerDb(database, "Base de Datos", "PostgreSQL", "Almacena usuarios, perfiles, habilidades, proyectos, equipos y mensajes.")
+
+System_Ext(auth, "Servicio de Autenticación", "Gestiona identidad, inicio de sesión y recuperación de acceso.")
+
+System_Ext(email, "Servicio de Email", "Envía correos y notificaciones.")
+
+Rel(web, authMiddleware, "Envía solicitudes", "HTTPS / JSON")
+
+Rel(authMiddleware, controller, "Autoriza la solicitud")
+
+Rel(controller, service, "Ejecuta caso de uso")
+
+Rel(service, domain, "Aplica reglas de negocio")
+
+Rel(domain, repository, "Solicita acceso a datos")
+
+Rel(repository, database, "Lee y persiste información", "EF Core / PostgreSQL")
+
+Rel(authMiddleware, auth, "Valida identidad", "HTTPS")
+
+Rel(service, email, "Solicita envío de correos", "HTTPS")
