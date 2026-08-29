@@ -1,0 +1,25 @@
+C4Container
+
+title TalentMatch - Nivel 2: Arquitectura de Contenedores
+
+Person(student, "Estudiante", "Gestiona su perfil, busca proyectos y forma equipos.")
+Person(professor, "Profesor", "Publica proyectos y supervisa equipos.")
+Person(admin, "Administrador", "Gestiona usuarios, proyectos y permisos.")
+
+System_Boundary(talentmatch, "TalentMatch") {
+    Container(web, "Aplicacion Web", "React y TypeScript", "Interfaz web responsive para los usuarios.")
+    Container(api, "Backend API REST", ".NET 8 y C#", "Gestiona la logica de negocio y los servicios de la plataforma.")
+    ContainerDb(database, "Base de Datos", "PostgreSQL", "Almacena la informacion principal de TalentMatch.")
+}
+
+System_Ext(auth, "Servicio de Autenticacion", "Gestiona el inicio de sesion y la validacion de usuarios.")
+System_Ext(email, "Servicio de Notificaciones", "Envia correos y notificaciones a los usuarios.")
+
+Rel(student, web, "Utiliza", "HTTPS")
+Rel(professor, web, "Utiliza", "HTTPS")
+Rel(admin, web, "Utiliza", "HTTPS")
+
+Rel(web, api, "Consume", "HTTPS y JSON")
+Rel(api, database, "Lee y escribe", "PostgreSQL")
+Rel(api, auth, "Valida usuarios", "HTTPS")
+Rel(api, email, "Envia notificaciones", "HTTPS")
