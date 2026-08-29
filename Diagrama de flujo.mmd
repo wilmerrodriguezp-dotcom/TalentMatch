@@ -1,91 +1,40 @@
-flowchart TD
-    A["ETAPA 1: Descubrimiento<br/>y Requerimientos"]
-
-    B{"¿QUÉ SE HACE?<br/>Levantamiento de<br/>Información"}
-
-    C["¿Qué queremos construir?<br/>( TalentMatch
-        Plataforma web para formar equipos académicos
-        Sistema de recomendación de compañeros
-        Conexión entre estudiantes y proyectos
-      Objetivos del negocio
-        Facilitar la formación de equipos
-        Aprovechar mejor las habilidades
-        Reducir el tiempo para encontrar compañeros
-        Mejorar la colaboración académica)"]
-    D["¿Para quién?<br/>( Estudiantes
-        Crean su perfil
-        Registran habilidades
-        Indican intereses
-        Buscan proyectos
-        Encuentran compañeros compatibles
-      Profesores
-        Publican proyectos
-        Supervisan equipos
-        Consultan avances
-      Administradores
-        Gestionan usuarios
-        Gestionan proyectos
-        Supervisan la plataforma)"]
-    E["¿Qué debe hacer?<br/>( Requerimientos funcionales
-        Registro e inicio de sesión
-        Crear y editar perfil
-        Registrar habilidades
-        Registrar intereses
-        Publicar proyectos
-        Buscar proyectos
-        Buscar estudiantes
-        Recomendar compañeros
-        Crear equipos
-        Gestionar proyectos
-        Chat entre integrantes
-        Notificaciones
-        Panel administrativo
-      Requerimientos no funcionales
-        Seguridad de datos
-        Interfaz responsive
-        Facilidad de uso
-        Buen tiempo de respuesta
-        Disponibilidad
-        Escalabilidad
-        Compatibilidad con navegadores
-        Protección de contraseñas)"]
-
-    F["RESULTADO ESPERADO:<br/>  Documento de visión
-        Problema
-        Solución
-        Objetivos
-        Beneficios
-      Alcance
-        Gestión de usuarios
-        Perfiles y habilidades
-        Matching de estudiantes
-        Gestión de proyectos
-        Comunicación
-      Arquitectura
-        Frontend
-        Backend
-        Base de datos
-        API REST
-        Sistema de recomendación
-      Contratos iniciales
-        Reglas de negocio
-        Requisitos
-        Roles y permisos
-        Casos de uso"]
-
-    A --> B
-
-    B --> C
-    B --> D
-    B --> E
-
-    C --> F
-    D --> F
-    E --> F
-
-    style A fill:#183b8c,color:#fff,stroke:#4da3ff
-    style B fill:#f28c00,color:#fff,stroke:#ffb347
-    style C fill:#e8f7ff,color:#111,stroke:#4da3ff
-    style D fill:#e8f7ff,color:#111,stroke:#4da3ff
-    style E fill:#e8f7ff,color:#111,stroke:#4da3ff
-    style F fill:#d9f7e5,color:#111,stroke:#3cb371
+flowchart TD 
+    A["ETAPA 1<br/>Descubrimiento y Requerimientos"] 
+ 
+    B{"¿Qué se hace?"} 
+    B1["Levantamiento de información"] 
+ 
+    C["¿Qué queremos construir?<br/>• TalentMatch<br/>• Plataforma web para equipos académicos<br/>• Recomendación de compañeros<br/>• Conexión entre estudiantes y proyectos"] 
+ 
+    D["¿Para quién?<br/>• Estudiantes<br/>• Profesores<br/>• Administradores"] 
+ 
+    E["¿Qué debe hacer?<br/>• Gestión de perfiles<br/>• Registro de habilidades e intereses<br/>• Publicación y búsqueda de proyectos<br/>• Recomendación de compañeros<br/>• Creación de equipos<br/>• Chat y notificaciones<br/>• Panel administrativo"] 
+ 
+    G["Requisitos de calidad<br/>• Seguridad<br/>• Diseño responsive<br/>• Facilidad de uso<br/>• Buen rendimiento<br/>• Disponibilidad y escalabilidad"] 
+ 
+    F["RESULTADO ESPERADO<br/>Documento de visión del proyecto"] 
+ 
+    H["Contenido del documento<br/>• Problema y solución<br/>• Objetivos y beneficios<br/>• Alcance<br/>• Requisitos<br/>• Roles y permisos<br/>• Casos de uso<br/>• Arquitectura general"] 
+ 
+    A --> B 
+    B --> B1 
+    B1 --> C 
+    B1 --> D 
+    B1 --> E 
+    B1 --> G 
+ 
+    C --> F 
+    D --> F 
+    E --> F 
+    G --> F 
+    F --> H 
+ 
+    classDef etapa fill:#5B4B8A,color:#fff,stroke:#8A7CCF,stroke-width:2px; 
+    classDef decision fill:#E67E22,color:#fff,stroke:#F5B041,stroke-width:2px; 
+    classDef bloque fill:#EAF4FB,color:#111,stroke:#7FB3D5,stroke-width:1px; 
+    classDef resultado fill:#D5F5E3,color:#111,stroke:#52BE80,stroke-width:2px; 
+ 
+    class A etapa; 
+    class B decision; 
+    class B1,C,D,E,G bloque; 
+    class F,H resultado;
