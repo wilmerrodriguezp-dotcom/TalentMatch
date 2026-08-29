@@ -1,82 +1,40 @@
 C4Component
-    title TalentMatch - Nivel 3: Componentes del Backend API REST
 
+title TalentMatch - Nivel 3: Componentes del Backend API REST
 
-    %% =====================================================
-    %% APLICACIÓN WEB
-    %% =====================================================
+Container(web, "Aplicación Web", "React / TypeScript", "Interfaz para estudiantes, profesores y administradores.")
 
-    Container(web, "Aplicación Web SPA", "React / TypeScript", "Interfaz web para estudiantes, profesores y administradores.")
+Container_Boundary(api, "Backend API REST") {
 
+    Component(authMiddleware, "Autenticación y Autorización", "ASP.NET Core / JWT", "Valida tokens y permisos de acceso.")
 
-    %% =====================================================
-    %% BACKEND API
-    %% =====================================================
+    Component(controller, "API Controllers", "ASP.NET Core", "Recibe solicitudes HTTP y expone los endpoints.")
 
-    Container_Boundary(api, "Backend API REST") {
+    Component(service, "Servicios de Aplicación", ".NET 8 / C#", "Coordina los casos de uso del sistema.")
 
-        Component(authMiddleware, "Auth Middleware / JWT", "ASP.NET Core Middleware", "Valida tokens JWT y controla el acceso a los endpoints.")
+    Component(domain, "Lógica de Negocio", ".NET 8 / C#", "Gestiona las reglas de usuarios, proyectos, equipos y matching.")
 
-        Component(controller, "API Controllers", "ASP.NET Core Controllers", "Reciben las solicitudes HTTP y exponen los endpoints de la API.")
+    Component(repository, "Repositorios", "Entity Framework Core", "Gestiona el acceso y persistencia de los datos.")
+}
 
-        Component(service, "Application Services", ".NET 8 / C#", "Coordina los casos de uso y la lógica de aplicación.")
+ContainerDb(database, "Base de Datos", "PostgreSQL", "Almacena usuarios, perfiles, habilidades, proyectos, equipos y mensajes.")
 
-        Component(domain, "Domain Logic", ".NET 8 / C#", "Aplica las reglas de negocio de usuarios, perfiles, proyectos, equipos y postulaciones.")
+System_Ext(auth, "Servicio de Autenticación", "Gestiona identidad, inicio de sesión y recuperación de acceso.")
 
-        Component(repository, "Repositories", "Entity Framework Core", "Gestiona el acceso y persistencia de los datos.")
+System_Ext(email, "Servicio de Email", "Envía correos y notificaciones.")
 
-    }
+Rel(web, authMiddleware, "Envía solicitudes", "HTTPS / JSON")
 
+Rel(authMiddleware, controller, "Autoriza la solicitud")
 
-    %% =====================================================
-    %% BASE DE DATOS
-    %% =====================================================
+Rel(controller, service, "Ejecuta caso de uso")
 
-    ContainerDb(database, "Base de Datos", "PostgreSQL", "Almacena usuarios, perfiles, habilidades, intereses, proyectos, equipos, postulaciones, recomendaciones, mensajes y notificaciones.")
+Rel(service, domain, "Aplica reglas de negocio")
 
+Rel(domain, repository, "Solicita acceso a datos")
 
-    %% =====================================================
-    %% SERVICIOS EXTERNOS
-    %% =====================================================
+Rel(repository, database, "Lee y persiste información", "EF Core / PostgreSQL")
 
-    System_Ext(auth, "Servicio de Autenticación", "Gestiona registro, inicio de sesión y control de acceso.")
+Rel(authMiddleware, auth, "Valida identidad", "HTTPS")
 
-    System_Ext(email, "Servicio de Email", "Envía correos de registro, recuperación de contraseña y notificaciones.")
-
-
-    %% =====================================================
-    %% FLUJO PRINCIPAL VERTICAL
-    %% =====================================================
-
-    Rel_D(web, authMiddleware, "Request HTTP", "JSON / HTTPS")
-
-    Rel_D(authMiddleware, controller, "Valida Token JWT")
-
-    Rel_D(controller, service, "Invoca servicio")
-
-    Rel_D(service, domain, "Ejecuta reglas de negocio")
-
-    Rel_D(domain, repository, "Consulta / modifica")
-
-    Rel_D(repository, database, "Lee / escribe", "Entity Framework / PostgreSQL")
-
-
-    %% =====================================================
-    %% AUTENTICACIÓN
-    %% =====================================================
-
-    Rel_R(authMiddleware, auth, "Valida autenticación", "HTTPS")
-
-
-    %% =====================================================
-    %% NOTIFICACIONES
-    %% =====================================================
-
-    Rel_R(service, email, "Envía notificaciones", "HTTPS")
-
-
-    %% =====================================================
-    %% CONFIGURACIÓN DEL LAYOUT
-    %% =====================================================
-
-    UpdateLayoutConfig($c4ShapeInRow="1", $c4BoundaryInRow="1")
+Rel(service, email, "Solicita envío de correos", "HTTPS")
