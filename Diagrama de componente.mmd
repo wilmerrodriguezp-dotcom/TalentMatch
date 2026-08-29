@@ -1,0 +1,82 @@
+C4Component
+    title TalentMatch - Nivel 3: Componentes del Backend API REST
+
+
+    %% =====================================================
+    %% APLICACIÓN WEB
+    %% =====================================================
+
+    Container(web, "Aplicación Web SPA", "React / TypeScript", "Interfaz web para estudiantes, profesores y administradores.")
+
+
+    %% =====================================================
+    %% BACKEND API
+    %% =====================================================
+
+    Container_Boundary(api, "Backend API REST") {
+
+        Component(authMiddleware, "Auth Middleware / JWT", "ASP.NET Core Middleware", "Valida tokens JWT y controla el acceso a los endpoints.")
+
+        Component(controller, "API Controllers", "ASP.NET Core Controllers", "Reciben las solicitudes HTTP y exponen los endpoints de la API.")
+
+        Component(service, "Application Services", ".NET 8 / C#", "Coordina los casos de uso y la lógica de aplicación.")
+
+        Component(domain, "Domain Logic", ".NET 8 / C#", "Aplica las reglas de negocio de usuarios, perfiles, proyectos, equipos y postulaciones.")
+
+        Component(repository, "Repositories", "Entity Framework Core", "Gestiona el acceso y persistencia de los datos.")
+
+    }
+
+
+    %% =====================================================
+    %% BASE DE DATOS
+    %% =====================================================
+
+    ContainerDb(database, "Base de Datos", "PostgreSQL", "Almacena usuarios, perfiles, habilidades, intereses, proyectos, equipos, postulaciones, recomendaciones, mensajes y notificaciones.")
+
+
+    %% =====================================================
+    %% SERVICIOS EXTERNOS
+    %% =====================================================
+
+    System_Ext(auth, "Servicio de Autenticación", "Gestiona registro, inicio de sesión y control de acceso.")
+
+    System_Ext(email, "Servicio de Email", "Envía correos de registro, recuperación de contraseña y notificaciones.")
+
+
+    %% =====================================================
+    %% FLUJO PRINCIPAL VERTICAL
+    %% =====================================================
+
+    Rel_D(web, authMiddleware, "Request HTTP", "JSON / HTTPS")
+
+    Rel_D(authMiddleware, controller, "Valida Token JWT")
+
+    Rel_D(controller, service, "Invoca servicio")
+
+    Rel_D(service, domain, "Ejecuta reglas de negocio")
+
+    Rel_D(domain, repository, "Consulta / modifica")
+
+    Rel_D(repository, database, "Lee / escribe", "Entity Framework / PostgreSQL")
+
+
+    %% =====================================================
+    %% AUTENTICACIÓN
+    %% =====================================================
+
+    Rel_R(authMiddleware, auth, "Valida autenticación", "HTTPS")
+
+
+    %% =====================================================
+    %% NOTIFICACIONES
+    %% =====================================================
+
+    Rel_R(service, email, "Envía notificaciones", "HTTPS")
+
+
+    %% =====================================================
+    %% CONFIGURACIÓN DEL LAYOUT
+    %% =====================================================
+
+    UpdateLayoutConfig($c4ShapeInRow="1", $c4BoundaryInRow="1")
