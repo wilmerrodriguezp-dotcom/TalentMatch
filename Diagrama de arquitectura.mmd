@@ -1,0 +1,81 @@
+C4Container
+    title TalentMatch - Nivel 2: Diagrama de Contenedores
+
+    %% =====================================================
+    %% ACTORES
+    %% =====================================================
+
+    Person(student, "Estudiante", "Gestiona su perfil, habilidades e intereses, busca proyectos y forma equipos.")
+
+    Person(professor, "Profesor", "Publica proyectos, supervisa equipos y consulta avances.")
+
+    Person(admin, "Administrador", "Gestiona usuarios, proyectos y supervisa la plataforma.")
+
+
+    %% =====================================================
+    %% SISTEMA TALENTMATCH
+    %% =====================================================
+
+    System_Boundary(talentmatch, "TalentMatch") {
+
+        Container(web, "Aplicación Web", "React / TypeScript", "Interfaz web responsive para estudiantes, profesores y administradores.")
+
+        Container(api, "Backend API REST", ".NET 8 / C#", "Gestiona usuarios, perfiles, habilidades, intereses, proyectos, equipos, postulaciones, chat y notificaciones.")
+
+        ContainerDb(database, "Base de Datos", "PostgreSQL", "Almacena usuarios, perfiles, habilidades, intereses, proyectos, equipos, postulaciones, recomendaciones, mensajes y notificaciones.")
+    }
+
+
+    %% =====================================================
+    %% SISTEMAS EXTERNOS
+    %% =====================================================
+
+    System_Ext(auth, "Servicio de Autenticación", "Gestiona registro, inicio de sesión, autenticación y control de acceso.")
+
+    System_Ext(email, "Servicio de Email", "Envía correos electrónicos de registro, recuperación de contraseña y notificaciones.")
+
+
+    %% =====================================================
+    %% ACTORES -> APLICACIÓN WEB
+    %% =====================================================
+
+    Rel_D(student, web, "Utiliza", "HTTPS")
+
+    Rel_D(professor, web, "Utiliza", "HTTPS")
+
+    Rel_D(admin, web, "Utiliza", "HTTPS")
+
+
+    %% =====================================================
+    %% APLICACIÓN WEB -> BACKEND
+    %% =====================================================
+
+    Rel_D(web, api, "Consume API", "JSON / HTTPS")
+
+
+    %% =====================================================
+    %% BACKEND -> BASE DE DATOS
+    %% =====================================================
+
+    Rel_R(api, database, "Lee y escribe", "PostgreSQL")
+
+
+    %% =====================================================
+    %% BACKEND -> AUTENTICACIÓN
+    %% =====================================================
+
+    Rel_L(api, auth, "Autentica usuarios", "HTTPS")
+
+
+    %% =====================================================
+    %% BACKEND -> EMAIL
+    %% =====================================================
+
+    Rel_R(api, email, "Envía correos", "HTTPS")
+
+
+    %% =====================================================
+    %% CONFIGURACIÓN VISUAL
+    %% =====================================================
+
+    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
