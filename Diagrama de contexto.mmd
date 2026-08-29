@@ -1,0 +1,50 @@
+C4Context
+    title TalentMatch - Nivel 1: Contexto
+
+    %% =========================
+    %% ACTORES
+    %% =========================
+
+    Person(student, "Estudiante", "Crea su perfil, registra habilidades e intereses, busca proyectos y compañeros compatibles.")
+
+    Person(professor, "Profesor", "Publica proyectos, supervisa equipos y consulta avances.")
+
+    Person(admin, "Administrador", "Gestiona usuarios, proyectos, permisos y supervisa la plataforma.")
+
+
+    %% =========================
+    %% SISTEMA PRINCIPAL
+    %% =========================
+
+    System(talentmatch, "TalentMatch", "Plataforma web que conecta estudiantes con proyectos y compañeros compatibles mediante un sistema de recomendacion.")
+
+
+    %% =========================
+    %% SISTEMAS EXTERNOS
+    %% =========================
+
+    System_Ext(auth, "Servicio de Autenticacion", "Gestiona el registro, inicio de sesion y acceso seguro de los usuarios.")
+
+    System_Ext(email, "Servicio SMS / Email", "Envia notificaciones y comunicaciones a los usuarios.")
+
+
+    %% =========================
+    %% RELACIONES
+    %% =========================
+
+    Rel(student, talentmatch, "Usa la plataforma")
+
+    Rel(professor, talentmatch, "Publica y supervisa proyectos")
+
+    Rel(admin, talentmatch, "Gestiona operaciones")
+
+    Rel(talentmatch, auth, "Gestiona acceso")
+
+    Rel(talentmatch, email, "Envia notificaciones")
+
+
+    %% =========================
+    %% CONFIGURACION DEL DISEÑO
+    %% =========================
+
+    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
