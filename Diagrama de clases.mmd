@@ -1,0 +1,173 @@
+classDiagram
+
+    class Usuario {
+        +int idUsuario
+        +string nombre
+        +string apellido
+        +string correo
+        +string contrasenaHash
+        +string rol
+        +boolean activo
+        +datetime fechaRegistro
+        +iniciarSesion()
+        +actualizarPerfil()
+    }
+
+    class Estudiante {
+        +string codigoEstudiante
+        +string carrera
+        +int semestre
+        +buscarProyectos()
+        +buscarCompaneros()
+        +postularseProyecto()
+    }
+
+    class Profesor {
+        +string codigoProfesor
+        +string facultad
+        +crearProyecto()
+        +supervisarEquipo()
+        +consultarAvances()
+    }
+
+    class Administrador {
+        +gestionarUsuarios()
+        +gestionarProyectos()
+        +gestionarPermisos()
+    }
+
+    class Perfil {
+        +int idPerfil
+        +string descripcion
+        +string fotoPerfil
+        +string disponibilidad
+        +actualizarDescripcion()
+    }
+
+    class Habilidad {
+        +int idHabilidad
+        +string nombre
+        +string categoria
+        +string nivel
+    }
+
+    class Interes {
+        +int idInteres
+        +string nombre
+        +string descripcion
+    }
+
+    class Proyecto {
+        +int idProyecto
+        +string titulo
+        +string descripcion
+        +string estado
+        +datetime fechaCreacion
+        +datetime fechaLimite
+        +int cuposDisponibles
+        +publicar()
+        +actualizar()
+        +cerrar()
+    }
+
+    class Equipo {
+        +int idEquipo
+        +string nombre
+        +datetime fechaCreacion
+        +string estado
+        +agregarMiembro()
+        +eliminarMiembro()
+    }
+
+    class Postulacion {
+        +int idPostulacion
+        +datetime fechaPostulacion
+        +string estado
+        +string mensaje
+        +aceptar()
+        +rechazar()
+    }
+
+    class Recomendacion {
+        +int idRecomendacion
+        +float porcentajeCompatibilidad
+        +datetime fechaGeneracion
+        +string motivo
+        +calcularCompatibilidad()
+    }
+
+    class Mensaje {
+        +int idMensaje
+        +string contenido
+        +datetime fechaEnvio
+        +boolean leido
+        +enviar()
+        +marcarComoLeido()
+    }
+
+    class Notificacion {
+        +int idNotificacion
+        +string titulo
+        +string mensaje
+        +string tipo
+        +boolean leida
+        +datetime fechaCreacion
+        +marcarComoLeida()
+    }
+
+    class Avance {
+        +int idAvance
+        +string descripcion
+        +datetime fechaRegistro
+        +int porcentajeAvance
+        +registrarAvance()
+    }
+
+    class UsuarioHabilidad {
+        +int idUsuarioHabilidad
+        +string nivel
+        +int experienciaMeses
+    }
+
+    class UsuarioInteres {
+        +int idUsuarioInteres
+    }
+
+    class MiembroEquipo {
+        +int idMiembroEquipo
+        +string rolEquipo
+        +datetime fechaIngreso
+    }
+
+    Usuario <|-- Estudiante
+    Usuario <|-- Profesor
+    Usuario <|-- Administrador
+
+    Usuario "1" --> "1" Perfil : posee
+
+    Perfil "1" --> "0..*" UsuarioHabilidad : tiene
+    Habilidad "1" --> "0..*" UsuarioHabilidad : clasifica
+
+    Perfil "1" --> "0..*" UsuarioInteres : tiene
+    Interes "1" --> "0..*" UsuarioInteres : clasifica
+
+    Profesor "1" --> "0..*" Proyecto : publica
+
+    Proyecto "1" --> "0..*" Equipo : contiene
+    Proyecto "1" --> "0..*" Postulacion : recibe
+    Proyecto "1" --> "0..*" Avance : registra
+
+    Estudiante "1" --> "0..*" Postulacion : realiza
+
+    Equipo "1" --> "1..*" MiembroEquipo : contiene
+    Estudiante "1" --> "0..*" MiembroEquipo : participa
+
+    Estudiante "1" --> "0..*" Recomendacion : recibe
+    Proyecto "1" --> "0..*" Recomendacion : genera
+
+    Usuario "1" --> "0..*" Mensaje : envia
+    Equipo "1" --> "0..*" Mensaje : contiene
+
+    Usuario "1" --> "0..*" Notificacion : recibe
+
+    Equipo "1" --> "0..*" Avance : reporta
