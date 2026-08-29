@@ -1,40 +1,50 @@
-C4Component
+C4Context
+    title TalentMatch - Nivel 1: Contexto
 
-title TalentMatch - Nivel 3: Componentes del Backend API REST
+    %% =========================
+    %% ACTORES
+    %% =========================
 
-Container(web, "Aplicación Web", "React / TypeScript", "Interfaz para estudiantes, profesores y administradores.")
+    Person(student, "Estudiante", "Crea su perfil, registra habilidades e intereses, busca proyectos y compañeros compatibles.")
 
-Container_Boundary(api, "Backend API REST") {
+    Person(professor, "Profesor", "Publica proyectos, supervisa equipos y consulta avances.")
 
-    Component(authMiddleware, "Autenticación y Autorización", "ASP.NET Core / JWT", "Valida tokens y permisos de acceso.")
+    Person(admin, "Administrador", "Gestiona usuarios, proyectos, permisos y supervisa la plataforma.")
 
-    Component(controller, "API Controllers", "ASP.NET Core", "Recibe solicitudes HTTP y expone los endpoints.")
 
-    Component(service, "Servicios de Aplicación", ".NET 8 / C#", "Coordina los casos de uso del sistema.")
+    %% =========================
+    %% SISTEMA PRINCIPAL
+    %% =========================
 
-    Component(domain, "Lógica de Negocio", ".NET 8 / C#", "Gestiona las reglas de usuarios, proyectos, equipos y matching.")
+    System(talentmatch, "TalentMatch", "Plataforma web que conecta estudiantes con proyectos y compañeros compatibles mediante un sistema de recomendacion.")
 
-    Component(repository, "Repositorios", "Entity Framework Core", "Gestiona el acceso y persistencia de los datos.")
-}
 
-ContainerDb(database, "Base de Datos", "PostgreSQL", "Almacena usuarios, perfiles, habilidades, proyectos, equipos y mensajes.")
+    %% =========================
+    %% SISTEMAS EXTERNOS
+    %% =========================
 
-System_Ext(auth, "Servicio de Autenticación", "Gestiona identidad, inicio de sesión y recuperación de acceso.")
+    System_Ext(auth, "Servicio de Autenticacion", "Gestiona el registro, inicio de sesion y acceso seguro de los usuarios.")
 
-System_Ext(email, "Servicio de Email", "Envía correos y notificaciones.")
+    System_Ext(email, "Servicio SMS / Email", "Envia notificaciones y comunicaciones a los usuarios.")
 
-Rel(web, authMiddleware, "Envía solicitudes", "HTTPS / JSON")
 
-Rel(authMiddleware, controller, "Autoriza la solicitud")
+    %% =========================
+    %% RELACIONES
+    %% =========================
 
-Rel(controller, service, "Ejecuta caso de uso")
+    Rel(student, talentmatch, "Usa la plataforma")
 
-Rel(service, domain, "Aplica reglas de negocio")
+    Rel(professor, talentmatch, "Publica y supervisa proyectos")
 
-Rel(domain, repository, "Solicita acceso a datos")
+    Rel(admin, talentmatch, "Gestiona operaciones")
 
-Rel(repository, database, "Lee y persiste información", "EF Core / PostgreSQL")
+    Rel(talentmatch, auth, "Gestiona acceso")
 
-Rel(authMiddleware, auth, "Valida identidad", "HTTPS")
+    Rel(talentmatch, email, "Envia notificaciones")
 
-Rel(service, email, "Solicita envío de correos", "HTTPS")
+
+    %% =========================
+    %% CONFIGURACION DEL DISEÑO
+    %% =========================
+
+    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
