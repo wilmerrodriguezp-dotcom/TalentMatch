@@ -1,0 +1,40 @@
+### Login como Admin
+POST https://localhost:7001/api/v1/login
+Content-Type: application/json
+
+{
+  "userName": "admin",
+  "password": "123456"
+}
+
+### Login como User
+POST https://localhost:7001/api/v1/login
+Content-Type: application/json
+
+{
+  "userName": "user",
+  "password": "123456"
+}
+
+### Listar productos (Admin)
+GET https://localhost:7001/api/v1/productos
+Authorization: Bearer {{token_admin}}
+
+### Probar acceso admin
+GET https://localhost:7001/api/v1/productos/admin-check
+Authorization: Bearer {{token_admin}}
+
+### Probar acceso user
+GET https://localhost:7001/api/v1/productos/user-check
+Authorization: Bearer {{token_user}}
+
+### Crear producto (Admin)
+POST https://localhost:7001/api/v1/productos
+Content-Type: application/json
+Authorization: Bearer {{token_admin}}
+
+{
+  "nombre": "Cámara 4K",
+  "precio": 1999.99,
+  "stock": 12
+}
