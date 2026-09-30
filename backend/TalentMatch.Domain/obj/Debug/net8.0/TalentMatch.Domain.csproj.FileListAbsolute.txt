@@ -1,0 +1,12 @@
+C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Domain\bin\Debug\net8.0\TalentMatch.Domain.deps.json
+C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Domain\bin\Debug\net8.0\TalentMatch.Domain.dll
+C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Domain\bin\Debug\net8.0\TalentMatch.Domain.pdb
+C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Domain\obj\Debug\net8.0\TalentMatch.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Domain\obj\Debug\net8.0\TalentMatch.Domain.AssemblyInfoInputs.cache
+C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Domain\obj\Debug\net8.0\TalentMatch.Domain.AssemblyInfo.cs
+C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Domain\obj\Debug\net8.0\TalentMatch.Domain.csproj.CoreCompileInputs.cache
+C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Domain\obj\Debug\net8.0\TalentMatch.Domain.sourcelink.json
+C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Domain\obj\Debug\net8.0\TalentMatch.Domain.dll
+C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Domain\obj\Debug\net8.0\refint\TalentMatch.Domain.dll
+C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Domain\obj\Debug\net8.0\TalentMatch.Domain.pdb
+C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Domain\obj\Debug\net8.0\ref\TalentMatch.Domain.dll

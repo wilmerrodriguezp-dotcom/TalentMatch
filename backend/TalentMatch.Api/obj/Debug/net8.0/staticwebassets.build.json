@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "l2VqLj5NeYyc+5gpafOJZwfNE6Gf3a2lqQG9C24sdeM=",
+  "Source": "TalentMatch.Api",
+  "BasePath": "_content/TalentMatch.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

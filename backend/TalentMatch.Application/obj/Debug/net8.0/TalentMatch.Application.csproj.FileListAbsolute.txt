@@ -1,0 +1,16 @@
+C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Application\obj\Debug\net8.0\TalentMatch.Application.csproj.AssemblyReference.cache
+C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Application\obj\Debug\net8.0\TalentMatch.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Application\obj\Debug\net8.0\TalentMatch.Application.AssemblyInfoInputs.cache
+C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Application\obj\Debug\net8.0\TalentMatch.Application.AssemblyInfo.cs
+C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Application\obj\Debug\net8.0\TalentMatch.Application.csproj.CoreCompileInputs.cache
+C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Application\obj\Debug\net8.0\TalentMatch.Application.sourcelink.json
+C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Application\bin\Debug\net8.0\TalentMatch.Application.deps.json
+C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Application\bin\Debug\net8.0\TalentMatch.Application.dll
+C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Application\bin\Debug\net8.0\TalentMatch.Application.pdb
+C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Application\bin\Debug\net8.0\TalentMatch.Domain.dll
+C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Application\bin\Debug\net8.0\TalentMatch.Domain.pdb
+C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Application\obj\Debug\net8.0\TalentMa.E8132B7C.Up2Date
+C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Application\obj\Debug\net8.0\TalentMatch.Application.dll
+C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Application\obj\Debug\net8.0\refint\TalentMatch.Application.dll
+C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Application\obj\Debug\net8.0\TalentMatch.Application.pdb
+C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Application\obj\Debug\net8.0\ref\TalentMatch.Application.dll
