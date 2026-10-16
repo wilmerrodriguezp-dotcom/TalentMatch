@@ -1,0 +1,12 @@
+# Deployment secrets
+/deploy/.env
+
+# Frontend dependencies and builds
+/frontend/node_modules/
+/frontend/dist/
+/frontend/.env*
+!/frontend/.env.example
+
+# .NET build output
+**/bin/
+**/obj/

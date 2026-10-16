@@ -23,25 +23,25 @@ body {
   padding: 2rem;
 }
 
-.product-form {
+.auth-form {
   display: grid;
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
 
-.product-form label {
+.auth-form label {
   display: grid;
   gap: 0.4rem;
   font-weight: 600;
 }
 
-.product-form input {
+.auth-form input {
   padding: 0.7rem 0.8rem;
   border: 1px solid #d1d5db;
   border-radius: 8px;
 }
 
-.product-form button {
+.auth-form button {
   border: none;
   background: #2563eb;
   color: white;
@@ -49,21 +49,6 @@ body {
   border-radius: 8px;
   font-weight: 700;
   cursor: pointer;
-}
-
-.product-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  gap: 0.8rem;
-}
-
-.product-list li {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 0.8rem 1rem;
 }
 
 .token-box {
@@ -103,15 +88,6 @@ body {
 .user-panel {
   background: #eff6ff;
   border-color: #bfdbfe;
-}
-
-.info-message {
-  background: #eef2ff;
-  color: #3730a3;
-  border: 1px solid #c7d2fe;
-  border-radius: 8px;
-  padding: 0.8rem 1rem;
-  margin-bottom: 1rem;
 }
 
 .error-message {

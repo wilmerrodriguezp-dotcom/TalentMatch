@@ -16,25 +16,14 @@ Content-Type: application/json
   "password": "123456"
 }
 
-### Listar productos (Admin)
-GET https://localhost:7001/api/v1/productos
-Authorization: Bearer {{token_admin}}
-
 ### Probar acceso admin
-GET https://localhost:7001/api/v1/productos/admin-check
+GET https://localhost:7001/api/v1/admin-check
 Authorization: Bearer {{token_admin}}
 
 ### Probar acceso user
-GET https://localhost:7001/api/v1/productos/user-check
+GET https://localhost:7001/api/v1/user-check
 Authorization: Bearer {{token_user}}
 
-### Crear producto (Admin)
-POST https://localhost:7001/api/v1/productos
-Content-Type: application/json
-Authorization: Bearer {{token_admin}}
-
-{
-  "nombre": "Cámara 4K",
-  "precio": 1999.99,
-  "stock": 12
-}
+### Verificar que User no puede acceder a la ruta de Admin (esperado: 403)
+GET https://localhost:7001/api/v1/admin-check
+Authorization: Bearer {{token_user}}

@@ -4,5 +4,5 @@ namespace TalentMatch.Application.Interfaces;
 
 public interface IAuthService
 {
-    Task<TokenResponseDto> LoginAsync(LoginRequestDto request);
+    Task<TokenResponseDto> LoginAsync(LoginRequestDto request, CancellationToken cancellationToken = default);
 }
