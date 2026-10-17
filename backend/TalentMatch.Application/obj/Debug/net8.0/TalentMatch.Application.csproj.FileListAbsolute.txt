@@ -14,3 +14,6 @@ C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Applica
 C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Application\obj\Debug\net8.0\refint\TalentMatch.Application.dll
 C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Application\obj\Debug\net8.0\TalentMatch.Application.pdb
 C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Application\obj\Debug\net8.0\ref\TalentMatch.Application.dll
+C:\Users\wilme\AppData\Local\Temp\TalentMatch-build-output\TalentMatch.Application.deps.json
+C:\Users\wilme\AppData\Local\Temp\TalentMatch-build-output\TalentMatch.Application.dll
+C:\Users\wilme\AppData\Local\Temp\TalentMatch-build-output\TalentMatch.Application.pdb

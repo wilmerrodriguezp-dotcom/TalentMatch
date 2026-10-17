@@ -16,3 +16,6 @@ C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Infrast
 C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Infrastructure\obj\Debug\net8.0\refint\TalentMatch.Infrastructure.dll
 C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Infrastructure\obj\Debug\net8.0\TalentMatch.Infrastructure.pdb
 C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Infrastructure\obj\Debug\net8.0\ref\TalentMatch.Infrastructure.dll
+C:\Users\wilme\AppData\Local\Temp\TalentMatch-build-output\TalentMatch.Infrastructure.deps.json
+C:\Users\wilme\AppData\Local\Temp\TalentMatch-build-output\TalentMatch.Infrastructure.dll
+C:\Users\wilme\AppData\Local\Temp\TalentMatch-build-output\TalentMatch.Infrastructure.pdb

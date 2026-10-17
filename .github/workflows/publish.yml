@@ -1,0 +1,103 @@
+name: Publish and deploy TalentMatch
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: talentmatch-production
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    outputs:
+      image_owner: ${{ steps.owner.outputs.value }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Normalize image owner
+        id: owner
+        run: echo "value=${GITHUB_REPOSITORY_OWNER,,}" >> "$GITHUB_OUTPUT"
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and publish API image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./backend
+          file: ./backend/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ steps.owner.outputs.value }}/talentmatch-api:${{ github.sha }}
+            ghcr.io/${{ steps.owner.outputs.value }}/talentmatch-api:latest
+          cache-from: type=gha,scope=api
+          cache-to: type=gha,scope=api,mode=max
+
+      - name: Build and publish frontend image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./frontend
+          file: ./frontend/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ steps.owner.outputs.value }}/talentmatch-frontend:${{ github.sha }}
+            ghcr.io/${{ steps.owner.outputs.value }}/talentmatch-frontend:latest
+          cache-from: type=gha,scope=frontend
+          cache-to: type=gha,scope=frontend,mode=max
+
+  deploy:
+    needs: publish
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout deployment files
+        uses: actions/checkout@v4
+
+      - name: Copy Compose configuration and deploy
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+          GHCR_USER: ${{ github.actor }}
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          IMAGE_OWNER: ${{ needs.publish.outputs.image_owner }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          : "${DEPLOY_HOST:?Add DEPLOY_HOST to repository secrets}"
+          : "${DEPLOY_USER:?Add DEPLOY_USER to repository secrets}"
+          : "${DEPLOY_PATH:?Add DEPLOY_PATH to repository secrets}"
+          : "${DEPLOY_SSH_KEY:?Add DEPLOY_SSH_KEY to repository secrets}"
+          : "${DEPLOY_KNOWN_HOSTS:?Add DEPLOY_KNOWN_HOSTS to repository secrets}"
+          if [[ "$DEPLOY_PATH" != /* || "$DEPLOY_PATH" == *".."* ]]; then
+            echo "DEPLOY_PATH must be an absolute path without '..'." >&2
+            exit 1
+          fi
+
+          install -m 700 -d "$HOME/.ssh"
+          key_file="$RUNNER_TEMP/talentmatch_deploy_key"
+          printf '%s\n' "$DEPLOY_SSH_KEY" > "$key_file"
+          chmod 600 "$key_file"
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
+          chmod 600 "$HOME/.ssh/known_hosts"
+
+          remote="$DEPLOY_USER@$DEPLOY_HOST"
+          ssh -i "$key_file" -o BatchMode=yes "$remote" "mkdir -p '$DEPLOY_PATH'"
+          scp -i "$key_file" deploy/docker-compose.yml deploy/Caddyfile database/create-users.sql "$remote:$DEPLOY_PATH/"
+          printf '%s' "$GHCR_TOKEN" | ssh -i "$key_file" -o BatchMode=yes "$remote" "docker login ghcr.io -u '$GHCR_USER' --password-stdin"
+          ssh -i "$key_file" -o BatchMode=yes "$remote" "cd '$DEPLOY_PATH' && IMAGE_OWNER='$IMAGE_OWNER' IMAGE_TAG='$IMAGE_TAG' docker compose config --quiet && IMAGE_OWNER='$IMAGE_OWNER' IMAGE_TAG='$IMAGE_TAG' docker compose pull && IMAGE_OWNER='$IMAGE_OWNER' IMAGE_TAG='$IMAGE_TAG' docker compose up -d --remove-orphans && IMAGE_OWNER='$IMAGE_OWNER' IMAGE_TAG='$IMAGE_TAG' docker compose exec -T caddy caddy reload --config /etc/caddy/Caddyfile"

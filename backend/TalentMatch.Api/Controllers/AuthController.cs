@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TalentMatch.Application.Dtos;
 using TalentMatch.Application.Interfaces;
@@ -17,12 +18,32 @@ public class AuthController : ControllerBase
 
     [HttpPost("login")]
     [ProducesResponseType(typeof(TokenResponseDto), StatusCodes.Status200OK)]
-    public async Task<IActionResult> Login([FromBody] LoginRequestDto request)
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<IActionResult> Login([FromBody] LoginRequestDto request, CancellationToken cancellationToken)
     {
         if (!ModelState.IsValid)
             return ValidationProblem(ModelState);
 
-        var token = await _authService.LoginAsync(request);
+        var token = await _authService.LoginAsync(request, cancellationToken);
         return Ok(token);
+    }
+
+    [HttpGet("admin-check")]
+    [Authorize(Policy = "AdminOnly")]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public IActionResult AdminCheck()
+    {
+        return Ok(new { mensaje = "Acceso permitido para administradores." });
+    }
+
+    [HttpGet("user-check")]
+    [Authorize(Policy = "UserOrAdmin")]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public IActionResult UserCheck()
+    {
+        return Ok(new { mensaje = "Acceso permitido para usuarios y administradores." });
     }
 }

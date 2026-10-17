@@ -2,11 +2,7 @@ import { useState } from 'react';
 import { useAuth } from '../auth-context';
 import { login } from '../api';
 
-type LoginFormProps = {
-  onSuccess?: () => void;
-};
-
-export function LoginForm({ onSuccess }: LoginFormProps) {
+export function LoginForm() {
   const { login: setAuth } = useAuth();
   const [username, setUsername] = useState('admin');
   const [password, setPassword] = useState('123456');
@@ -20,14 +16,13 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
       const data = await login(username, password);
       const nextRole = username === 'admin' ? 'Admin' : 'User';
       setAuth(data.token, nextRole);
-      onSuccess?.();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Error desconocido');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="product-form">
+    <form onSubmit={handleSubmit} className="auth-form">
       <label>
         Usuario
         <input value={username} onChange={(e) => setUsername(e.target.value)} />

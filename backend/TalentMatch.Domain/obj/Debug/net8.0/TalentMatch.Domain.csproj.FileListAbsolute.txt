@@ -10,3 +10,6 @@ C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Domain\
 C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Domain\obj\Debug\net8.0\refint\TalentMatch.Domain.dll
 C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Domain\obj\Debug\net8.0\TalentMatch.Domain.pdb
 C:\Users\wilme\OneDrive\Documents\GitHub\TalentMatch\backend\TalentMatch.Domain\obj\Debug\net8.0\ref\TalentMatch.Domain.dll
+C:\Users\wilme\AppData\Local\Temp\TalentMatch-build-output\TalentMatch.Domain.deps.json
+C:\Users\wilme\AppData\Local\Temp\TalentMatch-build-output\TalentMatch.Domain.dll
+C:\Users\wilme\AppData\Local\Temp\TalentMatch-build-output\TalentMatch.Domain.pdb

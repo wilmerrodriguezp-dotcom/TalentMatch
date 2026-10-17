@@ -1,0 +1,66 @@
+services:
+  api:
+    image: ghcr.io/${IMAGE_OWNER:?Set IMAGE_OWNER in the server .env}/talentmatch-api:${IMAGE_TAG:-latest}
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_HTTP_PORTS: "8080"
+      ConnectionStrings__DefaultConnection: Server=db;Port=3306;Database=TalentMatchDb;User ID=${MYSQL_USER:?Set MYSQL_USER in the server .env};Password=${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in the server .env};SslMode=None
+      Jwt__Key: ${JWT_KEY:?Set JWT_KEY in the server .env}
+      Jwt__Issuer: ${JWT_ISSUER:-TalentMatch}
+      Jwt__Audience: ${JWT_AUDIENCE:-TalentMatchUsers}
+      Swagger__Enabled: ${SWAGGER_ENABLED:-true}
+      BootstrapAdmin__UserName: ${BOOTSTRAP_ADMIN_USER:-}
+      BootstrapAdmin__Password: ${BOOTSTRAP_ADMIN_PASSWORD:-}
+    expose:
+      - "8080"
+
+  db:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: TalentMatchDb
+      MYSQL_USER: ${MYSQL_USER:?Set MYSQL_USER in the server .env}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in the server .env}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD in the server .env}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./create-users.sql:/docker-entrypoint-initdb.d/01-create-users.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u\"$$MYSQL_USER\" -p\"$$MYSQL_PASSWORD\" --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  frontend:
+    image: ghcr.io/${IMAGE_OWNER:?Set IMAGE_OWNER in the server .env}/talentmatch-frontend:${IMAGE_TAG:-latest}
+    restart: unless-stopped
+    depends_on:
+      - api
+    expose:
+      - "80"
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    environment:
+      DOMAIN_NAME: ${DOMAIN_NAME:?Set DOMAIN_NAME in the server .env}
+    depends_on:
+      - frontend
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:
+  mysql_data:
